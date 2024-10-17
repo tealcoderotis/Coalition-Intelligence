@@ -73,6 +73,11 @@ public abstract class GeneralVariableModifier<T> : MonoBehaviour where T : Gener
         // if gameObject.isVisible;
         SaveVariable();
         GameObject instantiatedObject = Instantiate(prefab, menuLocation.transform);
+        GameObject editButtonObject = instantiatedObject.transform.Find("EditButton").gameObject;
+        editButtonObject.SetActive(true);
+        Button editButton = editButtonObject.GetComponent<Button>();
+        editButton.onClick.AddListener(() => Debug.Log("Button edit button clicked"));
+        Debug.Log("Event listener created");
         CopyComponent<T>(Variable, instantiatedObject);
         ExitMenu();
     }
@@ -106,6 +111,6 @@ public abstract class GeneralVariableModifier<T> : MonoBehaviour where T : Gener
             {
                 field.SetValue(copy, field.GetValue(original));
             }
-        return copy as Two;
+        return null;
     }
 }

@@ -28,8 +28,8 @@ public class PresetJsonCode : MonoBehaviour
         if(!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
 
         saveJson.onClick.AddListener(() => Save(fileNameContainerEditor.text + ".json"));
-        loadJsonEditor.onClick.AddListener(() => Load(editorContainer, selectionDropdownEditor.options[selectionDropdownEditor.value].text));
-        loadJsonScouter.onClick.AddListener(() => Load(scouterContainer, selectionDropdownScouter.options[selectionDropdownScouter.value].text));
+        loadJsonEditor.onClick.AddListener(() => Load(editorContainer, selectionDropdownEditor.options[selectionDropdownEditor.value].text, true));
+        loadJsonScouter.onClick.AddListener(() => Load(scouterContainer, selectionDropdownScouter.options[selectionDropdownScouter.value].text, false));
     }
 
     [EditorCools.Button]
@@ -115,12 +115,12 @@ public class PresetJsonCode : MonoBehaviour
 
     public void LoadScouter()
     {
-        Load(scouterContainer, selectionDropdownScouter.options[selectionDropdownScouter.value].text);   
+        Load(scouterContainer, selectionDropdownScouter.options[selectionDropdownScouter.value].text, false);   
     }
 
     // Load would also need a PresetCode instance or have prefab GameObjects to be static
     [EditorCools.Button]
-    public void Load(Transform destination, string fileName)
+    public void Load(Transform destination, string fileName, bool isDestinationEditor)
     {
         if (File.Exists(Path.Combine(filePath, fileName)))
         {
@@ -192,6 +192,13 @@ public class PresetJsonCode : MonoBehaviour
 
                 variable.infoName = savedInformation[i].name;
                 variable.infoKey = savedInformation[i].key;
+                if (isDestinationEditor) {
+                    GameObject editButtonObject = prefab.transform.Find("EditButton").gameObject;
+                    editButtonObject.SetActive(true);
+                    Button editButton = editButtonObject.GetComponent<Button>();
+                    editButton.onClick.AddListener(() => Debug.Log("Button edit button clicked"));
+                    Debug.Log("Event listener created");
+                }
                 Instantiate(prefab, destination);
             }
         } else {

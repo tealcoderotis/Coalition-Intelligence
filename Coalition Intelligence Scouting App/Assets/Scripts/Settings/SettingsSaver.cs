@@ -182,7 +182,7 @@ public class SettingsSaver : MonoBehaviour
         teamField.text = currentConfigDevice.team;
         API_int.compDrop.value = currentConfigDevice.competition;
 
-        pJC.Load(pJC.scouterContainer, currentConfigDevice.preset);
+        pJC.Load(pJC.scouterContainer, currentConfigDevice.preset, false);
         pJC.ReloadDropdown(0, currentConfigDevice.preset);
     }
 
