@@ -68,6 +68,10 @@ public abstract class GeneralVariableModifier<T> : MonoBehaviour where T : Gener
         Variable.infoName = nameVisualizer.text;
         Variable.infoKey = keyVisualizer.text;
     }
+
+    protected virtual void GetVariable() {
+        
+    }
     protected void CreateVariable()
     {
         // if gameObject.isVisible;
@@ -76,7 +80,7 @@ public abstract class GeneralVariableModifier<T> : MonoBehaviour where T : Gener
         GameObject editButtonObject = instantiatedObject.transform.Find("EditButton").gameObject;
         editButtonObject.SetActive(true);
         Button editButton = editButtonObject.GetComponent<Button>();
-        editButton.onClick.AddListener(() => Debug.Log("Button edit button clicked"));
+        editButton.onClick.AddListener(() => SetToVariableValues(editButton));
         Debug.Log("Event listener created");
         CopyComponent<T>(Variable, instantiatedObject);
         ExitMenu();
@@ -111,6 +115,6 @@ public abstract class GeneralVariableModifier<T> : MonoBehaviour where T : Gener
             {
                 field.SetValue(copy, field.GetValue(original));
             }
-        return null;
+        return copy as Two;
     }
 }

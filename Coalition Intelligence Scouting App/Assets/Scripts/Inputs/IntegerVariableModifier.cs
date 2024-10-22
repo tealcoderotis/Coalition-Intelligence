@@ -28,6 +28,8 @@ public class IntegerVariableModifier : GeneralVariableModifier<IntegerVariable>
         minimumValueVisualizer.text = Variable.minimumValue.ToString();
         maximumValueExistsVisualizer.isOn = Variable.maximumValueExists;
         maximumValueVisualizer.text = Variable.maximumValue.ToString();
+        typeMenus.ChangeMenu(1);
+        Debug.Log("Button clicked!");
         // valueVisualizer.text = Variable.value.ToString();
     }
     protected override void SetToDefaultValues()
